@@ -1,7 +1,20 @@
 version: 0.2
 
 phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 879816410779.dkr.ecr.ap-south-1.amazonaws.com
+
   build:
     commands:
-      - echo "Building Docker Image..."
+      - echo Building Docker image...
       - docker build -t my-web-app:v1 .
+
+  post_build:
+    commands:
+      - echo Tagging image...
+      - docker tag my-web-app:v1 879816410779.dkr.ecr.ap-south-1.amazonaws.com/my-web-app:v1
+
+      - echo Pushing image...
+      - docker push 879816410779.dkr.ecr.ap-south-1.amazonaws.com/my-web-app:v1
