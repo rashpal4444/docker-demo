@@ -3,5 +3,5 @@ version: 0.2
 phases:
   build:
     commands:
-      - echo "Hello from CodeBuild"
-      - docker --version
+      - echo "Building Docker Image..."
+      - docker build -t my-web-app:v1 .
