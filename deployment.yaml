@@ -20,6 +20,7 @@ spec:
       containers:
       - name: my-web-app
         image: 879816410779.dkr.ecr.ap-south-1.amazonaws.com/my-web-app:v1
+        imagePullPolicy: Always
 
         ports:
         - containerPort: 80
